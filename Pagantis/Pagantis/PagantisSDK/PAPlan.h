@@ -10,4 +10,16 @@
 
 @interface PAPlan : NSObject
 
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, assign) NSInteger amount;
+@property (nonatomic, assign) NSInteger periodLong;
+@property (nonatomic, strong) NSString *periodCycle;
+@property (nonatomic, assign) NSInteger trialPeriodLong;
+@property (nonatomic, strong) NSString *trialPeriodCycle;
+@property (nonatomic, strong) NSString *currency;
+@property (nonatomic, strong) NSString *identifier;
+@property (nonatomic, strong) NSDate *createdAt;
+
++ (PAPlan*)planWithDictionary:(NSDictionary*)response;
+
 @end

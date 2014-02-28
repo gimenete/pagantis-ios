@@ -13,10 +13,12 @@
 @property (nonatomic, strong) NSString *brand;
 @property (nonatomic, strong) NSString *cardType;
 @property (nonatomic, strong) NSString *last4;
-@property (nonatomic, strong) NSNumber *expirationYear;
-@property (nonatomic, strong) NSNumber *expirationMonth;
+@property (nonatomic, assign) NSInteger expirationYear;
+@property (nonatomic, assign) NSInteger expirationMonth;
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) NSString *cvcCheck;
 @property (nonatomic, strong) NSString *identifier;
+
++ (PACard*)cardWithDictionary:(NSDictionary*)dict;
 
 @end

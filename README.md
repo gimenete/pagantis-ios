@@ -4,21 +4,26 @@ Pagantis iOS SDK
 Configuration
 -------------
 
-First of all, set your API key
+First of all, configure the SDK
 
-    [[PAPagantis sharedInstance] setApiKey:@"YOUR_API_KEY"];
-    
+    [[PAPagantis sharedInstance] setApiKey:@"xxxx"];
+    [[PAPagantis sharedInstance] setAccountId:@"xxxx"];
+    [[PAPagantis sharedInstance] setSignatureKey:@"xxx"];
+        
 
 Customers
 ---------
 
 Create a customer
     
-    PAPagantis *pagantis = [PAPagantis sharedInstance];
-    [pagantis createCustomerWithName:@"John Snow" email:@"john@example.com" reference:@"ref_john" completion:^(NSError *error, PACustomer *customer) {
+    PACreateCustomerRequest *customerRequest = [[PACreateCustomerRequest alloc] init];
+    customerRequest.name = @"John Snow";
+    customerRequest.email = @"john@example.com";
+    customerRequest.reference = @"ref_john";
+    [[PAPagantis sharedInstance] createCustomer:customerRequest completion:^(NSError *error, PACustomer *customer) {
         
         if (error) {
-            NSLog(@"error %@", [error localizedDescription]);
+            NSLog(@"error %@", error);
             return;
         }
         
@@ -26,4 +31,5 @@ Create a customer
         NSLog(@"email %@", customer.email);
         NSLog(@"reference %@", customer.reference);
         NSLog(@"id %@", customer.identifier);
+        
     }];

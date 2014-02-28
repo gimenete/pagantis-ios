@@ -25,6 +25,18 @@
 		09132A6D18BBB003003E6CB2 /* PAPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 09132A6C18BBB003003E6CB2 /* PAPlan.m */; };
 		09132A7018BBB01C003E6CB2 /* PACard.m in Sources */ = {isa = PBXBuildFile; fileRef = 09132A6F18BBB01C003E6CB2 /* PACard.m */; };
 		09132A7318BBBB89003E6CB2 /* NSDictionary+SanityChecks.m in Sources */ = {isa = PBXBuildFile; fileRef = 09132A7218BBBB89003E6CB2 /* NSDictionary+SanityChecks.m */; };
+		097FBF6118C0DCE70030371A /* PASale.m in Sources */ = {isa = PBXBuildFile; fileRef = 097FBF6018C0DCE70030371A /* PASale.m */; };
+		097FBF6418C0DFA50030371A /* PAActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 097FBF6318C0DFA50030371A /* PAActivity.m */; };
+		097FBF6718C0E11B0030371A /* PARefund.m in Sources */ = {isa = PBXBuildFile; fileRef = 097FBF6618C0E11B0030371A /* PARefund.m */; };
+		097FBF6A18C0EAE80030371A /* PATokenizeCardRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 097FBF6918C0EAE80030371A /* PATokenizeCardRequest.m */; };
+		097FBF6D18C0F2CC0030371A /* PACreateSubscriptionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 097FBF6C18C0F2CC0030371A /* PACreateSubscriptionRequest.m */; };
+		097FBF7018C0F7790030371A /* PACreateRefundRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 097FBF6F18C0F7790030371A /* PACreateRefundRequest.m */; };
+		097FBF7318C100380030371A /* PACreateCustomerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 097FBF7218C100380030371A /* PACreateCustomerRequest.m */; };
+		097FBF7618C100B60030371A /* PACreatePlanRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 097FBF7518C100B60030371A /* PACreatePlanRequest.m */; };
+		0983EBE218C0D96200776E87 /* PAHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0983EBE118C0D96200776E87 /* PAHomeViewController.m */; };
+		09EAEE9318C0204300A66937 /* PAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 09EAEE9218C0204300A66937 /* PAUtils.m */; };
+		09EAEE9618C021A300A66937 /* PAWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09EAEE9518C021A300A66937 /* PAWebViewController.m */; };
+		09EAEE9918C0311B00A66937 /* PACreateChargeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 09EAEE9818C0311B00A66937 /* PACreateChargeRequest.m */; };
 		112B7CEBF5B644158BFCE06F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7C41E8CCDDE4F0181D0162E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +79,30 @@
 		09132A6F18BBB01C003E6CB2 /* PACard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACard.m; sourceTree = "<group>"; };
 		09132A7118BBBB89003E6CB2 /* NSDictionary+SanityChecks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SanityChecks.h"; sourceTree = "<group>"; };
 		09132A7218BBBB89003E6CB2 /* NSDictionary+SanityChecks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SanityChecks.m"; sourceTree = "<group>"; };
+		097FBF5F18C0DCE70030371A /* PASale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASale.h; sourceTree = "<group>"; };
+		097FBF6018C0DCE70030371A /* PASale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASale.m; sourceTree = "<group>"; };
+		097FBF6218C0DFA50030371A /* PAActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAActivity.h; sourceTree = "<group>"; };
+		097FBF6318C0DFA50030371A /* PAActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAActivity.m; sourceTree = "<group>"; };
+		097FBF6518C0E11B0030371A /* PARefund.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARefund.h; sourceTree = "<group>"; };
+		097FBF6618C0E11B0030371A /* PARefund.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARefund.m; sourceTree = "<group>"; };
+		097FBF6818C0EAE80030371A /* PATokenizeCardRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATokenizeCardRequest.h; sourceTree = "<group>"; };
+		097FBF6918C0EAE80030371A /* PATokenizeCardRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATokenizeCardRequest.m; sourceTree = "<group>"; };
+		097FBF6B18C0F2CC0030371A /* PACreateSubscriptionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACreateSubscriptionRequest.h; sourceTree = "<group>"; };
+		097FBF6C18C0F2CC0030371A /* PACreateSubscriptionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACreateSubscriptionRequest.m; sourceTree = "<group>"; };
+		097FBF6E18C0F7790030371A /* PACreateRefundRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACreateRefundRequest.h; sourceTree = "<group>"; };
+		097FBF6F18C0F7790030371A /* PACreateRefundRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACreateRefundRequest.m; sourceTree = "<group>"; };
+		097FBF7118C100380030371A /* PACreateCustomerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACreateCustomerRequest.h; sourceTree = "<group>"; };
+		097FBF7218C100380030371A /* PACreateCustomerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACreateCustomerRequest.m; sourceTree = "<group>"; };
+		097FBF7418C100B60030371A /* PACreatePlanRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACreatePlanRequest.h; sourceTree = "<group>"; };
+		097FBF7518C100B60030371A /* PACreatePlanRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACreatePlanRequest.m; sourceTree = "<group>"; };
+		0983EBE018C0D96200776E87 /* PAHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAHomeViewController.h; sourceTree = "<group>"; };
+		0983EBE118C0D96200776E87 /* PAHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAHomeViewController.m; sourceTree = "<group>"; };
+		09EAEE9118C0204300A66937 /* PAUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAUtils.h; sourceTree = "<group>"; };
+		09EAEE9218C0204300A66937 /* PAUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAUtils.m; sourceTree = "<group>"; };
+		09EAEE9418C021A300A66937 /* PAWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAWebViewController.h; sourceTree = "<group>"; };
+		09EAEE9518C021A300A66937 /* PAWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAWebViewController.m; sourceTree = "<group>"; };
+		09EAEE9718C0311B00A66937 /* PACreateChargeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACreateChargeRequest.h; sourceTree = "<group>"; };
+		09EAEE9818C0311B00A66937 /* PACreateChargeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACreateChargeRequest.m; sourceTree = "<group>"; };
 		1EF80F92A22645DBBDC84773 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		E7C41E8CCDDE4F0181D0162E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -136,6 +172,8 @@
 				09132A4218BBA82E003E6CB2 /* PAAppDelegate.m */,
 				09132A4418BBA82E003E6CB2 /* Images.xcassets */,
 				09132A3918BBA82E003E6CB2 /* Supporting Files */,
+				0983EBE018C0D96200776E87 /* PAHomeViewController.h */,
+				0983EBE118C0D96200776E87 /* PAHomeViewController.m */,
 			);
 			path = Pagantis;
 			sourceTree = "<group>";
@@ -184,6 +222,28 @@
 				09132A6F18BBB01C003E6CB2 /* PACard.m */,
 				09132A7118BBBB89003E6CB2 /* NSDictionary+SanityChecks.h */,
 				09132A7218BBBB89003E6CB2 /* NSDictionary+SanityChecks.m */,
+				09EAEE9118C0204300A66937 /* PAUtils.h */,
+				09EAEE9218C0204300A66937 /* PAUtils.m */,
+				09EAEE9418C021A300A66937 /* PAWebViewController.h */,
+				09EAEE9518C021A300A66937 /* PAWebViewController.m */,
+				09EAEE9718C0311B00A66937 /* PACreateChargeRequest.h */,
+				09EAEE9818C0311B00A66937 /* PACreateChargeRequest.m */,
+				097FBF5F18C0DCE70030371A /* PASale.h */,
+				097FBF6018C0DCE70030371A /* PASale.m */,
+				097FBF6218C0DFA50030371A /* PAActivity.h */,
+				097FBF6318C0DFA50030371A /* PAActivity.m */,
+				097FBF6518C0E11B0030371A /* PARefund.h */,
+				097FBF6618C0E11B0030371A /* PARefund.m */,
+				097FBF6818C0EAE80030371A /* PATokenizeCardRequest.h */,
+				097FBF6918C0EAE80030371A /* PATokenizeCardRequest.m */,
+				097FBF6B18C0F2CC0030371A /* PACreateSubscriptionRequest.h */,
+				097FBF6C18C0F2CC0030371A /* PACreateSubscriptionRequest.m */,
+				097FBF6E18C0F7790030371A /* PACreateRefundRequest.h */,
+				097FBF6F18C0F7790030371A /* PACreateRefundRequest.m */,
+				097FBF7118C100380030371A /* PACreateCustomerRequest.h */,
+				097FBF7218C100380030371A /* PACreateCustomerRequest.m */,
+				097FBF7418C100B60030371A /* PACreatePlanRequest.h */,
+				097FBF7518C100B60030371A /* PACreatePlanRequest.m */,
 			);
 			path = PagantisSDK;
 			sourceTree = "<group>";
@@ -320,13 +380,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				09132A6718BBAFDA003E6CB2 /* PACharge.m in Sources */,
+				097FBF7618C100B60030371A /* PACreatePlanRequest.m in Sources */,
+				097FBF6418C0DFA50030371A /* PAActivity.m in Sources */,
+				09EAEE9318C0204300A66937 /* PAUtils.m in Sources */,
+				0983EBE218C0D96200776E87 /* PAHomeViewController.m in Sources */,
 				09132A7318BBBB89003E6CB2 /* NSDictionary+SanityChecks.m in Sources */,
 				09132A6D18BBB003003E6CB2 /* PAPlan.m in Sources */,
+				097FBF7018C0F7790030371A /* PACreateRefundRequest.m in Sources */,
+				09EAEE9618C021A300A66937 /* PAWebViewController.m in Sources */,
 				09132A3F18BBA82E003E6CB2 /* main.m in Sources */,
 				09132A4318BBA82E003E6CB2 /* PAAppDelegate.m in Sources */,
+				097FBF6718C0E11B0030371A /* PARefund.m in Sources */,
 				09132A6A18BBAFF1003E6CB2 /* PACustomer.m in Sources */,
 				09132A7018BBB01C003E6CB2 /* PACard.m in Sources */,
 				09132A6418BBA86E003E6CB2 /* PAPagantis.m in Sources */,
+				097FBF6D18C0F2CC0030371A /* PACreateSubscriptionRequest.m in Sources */,
+				09EAEE9918C0311B00A66937 /* PACreateChargeRequest.m in Sources */,
+				097FBF6118C0DCE70030371A /* PASale.m in Sources */,
+				097FBF6A18C0EAE80030371A /* PATokenizeCardRequest.m in Sources */,
+				097FBF7318C100380030371A /* PACreateCustomerRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
