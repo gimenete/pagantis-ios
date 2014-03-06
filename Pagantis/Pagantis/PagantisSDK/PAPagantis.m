@@ -24,8 +24,20 @@
 /* Internal methods */
 
 - (NSError*)errorFromRequestOperation:(AFHTTPRequestOperation*)operation withError:(NSError*)error {
-    // TODO: parse response body for a more detailed error message
-    // {"error":"bad_request","error_description":"An unknown error has occurred."}
+    NSData *data = operation.responseData;
+    if (data) {
+        id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        if (result && [result isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dict = (NSDictionary*)result;
+            NSString *error = [dict stringForKey:@"error"];
+            NSString *errorDescription = [dict stringForKey:@"error_description"];
+            if (error && errorDescription) {
+                return [self errorWithMessage:[NSString stringWithFormat:@"%@: %@", error, errorDescription]];
+            } else if (error) {
+                return [self errorWithMessage:error];
+            }
+        }
+    }
     return error;
 }
 

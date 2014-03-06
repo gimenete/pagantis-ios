@@ -129,6 +129,7 @@
     }];
      */
     
+    /*
     [[PAPagantis sharedInstance] findCharges:1 completion:^(NSError *error, NSArray *charges) {
         if (error) {
             NSLog(@"error %@", error);
@@ -140,6 +141,7 @@
             NSLog(@"charge %@ %@", charge.orderDescription, charge.identifier);
         }
     }];
+     */
     
     /*
     [[PAPagantis sharedInstance] findChargeWithIdentifier:@"cha_f54899832a0d1f1a4eb6be78aa63755c" completion:^(NSError *error, PACharge *charge) {

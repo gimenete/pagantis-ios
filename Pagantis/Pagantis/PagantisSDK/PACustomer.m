@@ -8,6 +8,7 @@
 
 #import "PACustomer.h"
 #import "NSDictionary+SanityChecks.h"
+#import "PAUtils.h"
 
 @implementation PACustomer
 
@@ -17,7 +18,7 @@
     customer.identifier  = [dictionary stringForKey:@"id"];
     customer.name        = [dictionary stringForKey:@"name"];
     customer.reference   = [dictionary stringForKey:@"reference"];
-    customer.createdAt   = nil; // TODO: [dictionary stringForKey:@"created_at"];
+    customer.createdAt   = [[PAUtils dateFormatter] dateFromString:[dictionary stringForKey:@"created_at"]];
     
     return customer;
 }

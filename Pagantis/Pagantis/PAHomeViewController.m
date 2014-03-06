@@ -73,17 +73,19 @@
         charge.amount = 100;
         charge.orderDescription = @"Precio de alta";
         
-        PAWebViewController *vc = [[PAPagantis sharedInstance] webViewControllerToCreateCharge:charge progress:^(PAWebViewControllerProgress progress) {
+        PAWebViewController *vc = [[PAPagantis sharedInstance] webViewControllerToCreateCharge:charge progress:^(PAWebViewController *webViewController, PAWebViewControllerProgress progress) {
             if (progress == PAWebViewControllerLoading) {
                 NSLog(@"loading...");
             } else if (progress == PAWebViewControllerLoaded) {
                 NSLog(@"loaded");
+                [webViewController hideActivityIndicator];
             }
         } completion:^(BOOL success) {
             [self.navigationController popViewControllerAnimated:YES];
             NSLog(@"completed %@", success?@"yes":@"no");
         }];
         
+        [vc showActivityIndicator];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 1) {
         PATokenizeCardRequest *tokenize = [[PATokenizeCardRequest alloc] init];
@@ -91,18 +93,27 @@
         tokenize.amount = 100;
         tokenize.orderDescription = @"Precio de alta";
         
-        PAWebViewController *vc = [[PAPagantis sharedInstance] webViewControllerToTokenizeCard:tokenize progress:^(PAWebViewControllerProgress progress) {
+        UINavigationController *nc = [[UINavigationController alloc] init];
+        
+        PAWebViewController *vc = [[PAPagantis sharedInstance] webViewControllerToTokenizeCard:tokenize progress:^(PAWebViewController *webViewController, PAWebViewControllerProgress progress) {
             if (progress == PAWebViewControllerLoading) {
                 NSLog(@"loading...");
             } else if (progress == PAWebViewControllerLoaded) {
                 NSLog(@"loaded");
+                [webViewController hideActivityIndicator];
             }
         } completion:^(BOOL success) {
-            [self.navigationController popViewControllerAnimated:YES];
-            NSLog(@"completed %@", success?@"yes":@"no");
+            // [self dismissPresentedViewController:nil];
+            NSLog(@"completed... %@", success?@"yes":@"no");
         }];
         
-        [self.navigationController pushViewController:vc animated:YES];
+        [vc showActivityIndicator];
+        vc.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissPresentedViewController:)];
+        
+        nc.viewControllers = @[vc];
+        nc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        nc.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentViewController:nc animated:YES completion:nil];
     } else if (indexPath.row == 2) {
         PACreateSubscriptionRequest *subscription = [[PACreateSubscriptionRequest alloc] init];
         subscription.currency = @"EUR";
@@ -110,19 +121,25 @@
         subscription.orderDescription = @"Recurrente";
         subscription.planIdentifier = @"pla_a422185ba306983fb8c259ac35c40929";
         
-        PAWebViewController *vc = [[PAPagantis sharedInstance] webViewControllerToCreateSubscription:subscription progress:^(PAWebViewControllerProgress progress) {
+        PAWebViewController *vc = [[PAPagantis sharedInstance] webViewControllerToCreateSubscription:subscription progress:^(PAWebViewController *webViewController, PAWebViewControllerProgress progress) {
             if (progress == PAWebViewControllerLoading) {
                 NSLog(@"loading...");
             } else if (progress == PAWebViewControllerLoaded) {
                 NSLog(@"loaded");
+                [webViewController hideActivityIndicator];
             }
         } completion:^(BOOL success) {
             [self.navigationController popViewControllerAnimated:YES];
             NSLog(@"completed %@", success?@"yes":@"no");
         }];
         
+        [vc showActivityIndicator];
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+- (void)dismissPresentedViewController:(id)sender {
+    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

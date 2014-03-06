@@ -13,8 +13,10 @@ typedef enum {
     PAWebViewControllerLoaded,
 } PAWebViewControllerProgress;
 
+@class PAWebViewController;
+
 typedef void(^WebViewControllerCompletionBlock)(BOOL success);
-typedef void(^WebViewControllerProgressBlock)(PAWebViewControllerProgress progress);
+typedef void(^WebViewControllerProgressBlock)(PAWebViewController *webViewController, PAWebViewControllerProgress progress);
 
 @interface PAWebViewController : UIViewController
 
@@ -22,5 +24,11 @@ typedef void(^WebViewControllerProgressBlock)(PAWebViewControllerProgress progre
 @property (nonatomic, copy) WebViewControllerProgressBlock progressBlock;
 
 - (id)initWithParams:(NSDictionary*)params;
+
+- (void)showActivityIndicator;
+
+- (void)showActivityIndicatorWithStyle:(UIActivityIndicatorViewStyle)style;
+
+- (void)hideActivityIndicator;
 
 @end
