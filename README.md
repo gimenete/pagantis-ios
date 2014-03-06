@@ -30,7 +30,7 @@ You will find the parameters to configure the SDK in the [Configuration → API]
 Overview
 --------
 
-The SDK has a singleton object that you can always access anywhere using `[PAPagantis sharedInstance]`. You will need to import `#import "PAPagantis.h>"` first.
+The SDK has a singleton object that you can always access anywhere using `[PAPagantis sharedInstance]`. You will need to import `#import "PAPagantis.h"` first.
 
 Usually read-only operations can be done calling just one method in that singleton. For example retrieving the list of customers. Other operations, usually operations that modify data, require to create a `PA...Request` object. For example to create a customer you first create a `PACreateCustomerRequest` object, you configure it with the desired values and finally you call the `createCustomer:customerRequest completion:` method in the `PAPagantis` singleton.
 
@@ -323,9 +323,9 @@ Example.
     [self.navigationController pushViewController:vc animated:YES];
 
 
-Presenting and personalizating PAWebViewControllers
+Presenting and personalizing PAWebViewControllers
 =================================
-Some operations at this moment require to show a `UIViewController` that presents a `UIWebView` to the user in which the payment card information is filled. These `UIViewControllers` have a minimal UI intentionally so you can customize it.
+Some operations at this moment require to show a `PAWebViewController` that contains a `UIWebView` where the payment card information is filled. These `UIViewControllers` have a minimal UI intentionally so you can customize it.
 
 ### Presenting inside a UINavigationController
 
