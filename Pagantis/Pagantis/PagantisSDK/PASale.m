@@ -14,7 +14,7 @@
 
 + (PASale*)saleWithDictionary:(NSDictionary*)dict {
     PASale *sale = [[PASale alloc] init];
-    sale.amount = [dict numberForKey:@"amount"];
+    sale.amount = [dict numberForKey:@"amount"].integerValue;
     sale.status = [dict stringForKey:@"status"];
     sale.orderIdentifier = [dict stringForKey:@"order_id"];
     sale.operation = [dict stringForKey:@"operation"];

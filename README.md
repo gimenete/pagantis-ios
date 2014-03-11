@@ -15,7 +15,7 @@ And then you run `pod install` in the command line an CocoaPods will download th
 Configuration
 -------------
 
-First of all you need to configure the SDK. The best way to do that is in your `AppDelegate`. In the `- (BOOL)application:didFinishLaunchingWithOptions:` method.
+First of all you need to configure the SDK. The best way to do that is in your `AppDelegate`. In the `application:didFinishLaunchingWithOptions:` method.
 
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	    [[PAPagantis sharedInstance] setApiKey:@"xxxx"];
@@ -32,11 +32,11 @@ Overview
 
 The SDK has a singleton object that you can always access anywhere using `[PAPagantis sharedInstance]`. You will need to import `#import "PAPagantis.h"` first.
 
-Usually read-only operations can be done calling just one method in that singleton. For example retrieving the list of customers. Other operations, usually operations that modify data, require to create a `PA...Request` object. For example to create a customer you first create a `PACreateCustomerRequest` object, you configure it with the desired values and finally you call the `createCustomer:customerRequest completion:` method in the `PAPagantis` singleton.
+Usually read-only operations can be done juast calling one method in that singleton. One example is retrieving the list of customers. Other operations, usually operations that modify data, require to create a `PA...Request` object. For example to create a customer you first create a `PACreateCustomerRequest` object, then you configure it with the desired values and finally you call the `createCustomer:completion:` method in the `PAPagantis` singleton.
 
-Some operations at this moment for security reasons require to use a `UIViewController` that contains a `UIWebView` where the user puts his/her payment card information. The SDK provides methods to create these `UIViewController` in each case and the UI is minimal so you can configure how the screen is presented and dismissed.
+Some operations at this moment for security reasons require you to use a `PAWebViewController` that contains a `UIWebView` where the user puts his/her payment card information. The SDK provides methods to create these `PAWebViewController`. In all cases the UI is minimal intentionally so you can configure how the screen is presented and dismissed. There is a special section in the documentation regarding how to present and personalize these screens.
 
-The SDK offers a block-based API. Usually these blocks receive first an `NSError` that will be `nil` if everything went fine, and then more information about the operations such an `NSArray` of results or just a single object or a `BOOL` value indicating success or not. We are not using separate blocks for success and failure since many times there is shared code for both situations. For example if you want to hide an activity indicator or dismiss a `UIViewContorller` you need to do that in both cases.
+The SDK offers a block-based API. Usually these blocks receive an `NSError` as first argument (that will be `nil` if everything went fine), and usually a second argument with more information about the operations such an `NSArray` of results or just a single object, or even just a `BOOL` value indicating success or not. We are not using separate blocks for success and failure since many times there is shared code for both situations. For example if you want to hide an activity indicator or dismiss a `UIViewContorller` you need to do that in both cases.
         
 
 Customers
@@ -44,13 +44,13 @@ Customers
 
 ### Create a customer
 
-To create a new customer you first create a `PACreateCustomerRequest` object, configure its values and then you call the `createCustomer:completion:` method. These are the parameters you can configure at this moment:
+To create a new customer you first create a `PACreateCustomerRequest` object, then you configure its values and finally you call the `createCustomer:completion:` method. These are the fields you can configure at this moment in the `PACreateCustomerRequest` object:
 
 * `name` The name you want to give to this customer
 * `email` The email address of this customer
 * `reference` This is an identifier you should generate. It usually should be an internal reference in your databases so you can match this customer in the future with more data in your databases.
 
-The completion block receives a `NSError` if something went wrong or `nil` if everything went fine, and a second object, a `PACustomer` object with the just created customer information. In this object you can get for example the `identifier` created by the backend.
+The completion block receives a `NSError` if something went wrong, or `nil` if everything went fine. The second argument is a `PACustomer` object with the information of the created customer. In this object you can get for example the `identifier` created by the backend.
 
 Example:
     
@@ -75,7 +75,7 @@ Example:
 
 ### Finding customers
 
-There is a simple method to find customers created previously. This method accepts one parameter that is the page number in the list of results. The completion block receives as first argument a `NSError` if something went wrong or `nil` otherwise. The second parameter is an `NSArray` of `PACustomer` objects.
+There is a simple method to find customers that were created previously. This method accepts one parameter that is the page number in the list of results. The completion block receives an `NSError` as first parameter if something went wrong, or `nil` otherwise. The second parameter is an `NSArray` of `PACustomer` objects.
 
     [[PAPagantis sharedInstance] findCustomers:1 completion:^(NSError *error, NSArray *customers) {
         
@@ -97,7 +97,7 @@ There is a simple method to find customers created previously. This method accep
 
 ### Find a customer by its identifier
 
-If you wish to read the information of a customer and you know its identifier you can use this method. The only argument additionally to the completion block is the identifier of the customer. The completion block receives as first argument an `NSError` (that is `nil` if everything went fine) and as second argument it receives the `PACustomer` object containing the information of the desired customer.
+If you wish to read the information of a customer and you know its identifier you can use this method. The only argument (additionally to the completion block) is the identifier of the customer. The completion block receives an `NSError` as first argument  (that is `nil` if everything went fine) and as second argument it receives the `PACustomer` object containing the information of the desired customer.
 
 Example:
 
@@ -119,7 +119,7 @@ Plans
 
 ### Create a plan
 
-To create a plan you first create a `PACreatePlanRequest` object, fill it with the desired values and then call the `createPlan:completion:` method. The values you can configure are:
+To create a plan you first create a `PACreatePlanRequest` object. Then you fill it with the desired values and then you call the `createPlan:completion:` method. The fields you can configure are:
 
 * `name` The name you want to give to this plan.
 * `amount` The amount in cents that will be charged to the customer each cycle.
@@ -268,7 +268,7 @@ Example:
 
 ### Tokenize a card
 
-At this moment to tokenize a card you always need to charge an amount of many. You can refund this charge inmediatly if you wish and in most cases the user won't even see the charge in their account movements.
+At this moment to tokenize a card you always need to charge an amount of money. You can refund this charge inmediatly if you wish, and in most cases the user won't even see the charge in their account movements.
 
 This operation requires to present a `PAWebViewController`. But first of all you need to create a `PATokenizeCardRequest` with the details of the operation. You will define the `amount` of money that is going to be charged and in which `currency` and you need to put a description to the operation.
 
@@ -413,7 +413,7 @@ Some methods and classes require you to specifiy a currency. In this cases you n
 
 Amounts
 -------
-Some methods and classes require to specify an amount of money. Amounts are always expressed in cents. So they are always an integer number. If you for example want to charge $100 you need to specify `amount = 10000`. Amounts are expressed in the currency indicated by you in a separate parameter.
+Some methods and classes require you to specify an amount of money. Amounts are always expressed in cents. So they are always an integer number. If you for example want to charge $100 you need to specify `amount = 10000`. Amounts are expressed in the currency indicated in a separate parameter.
 
 Period cycles
 -------------

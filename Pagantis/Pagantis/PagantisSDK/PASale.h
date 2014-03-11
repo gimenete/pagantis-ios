@@ -10,7 +10,7 @@
 
 @interface PASale : NSObject
 
-@property (nonatomic, strong) NSNumber *amount;
+@property (nonatomic, assign) NSInteger amount;
 @property (nonatomic, strong) NSString *status;
 @property (nonatomic, strong) NSString *orderIdentifier;
 @property (nonatomic, strong) NSString *operation;

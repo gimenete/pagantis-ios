@@ -14,9 +14,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[PAPagantis sharedInstance] setApiKey:@"xxxx"];
-    [[PAPagantis sharedInstance] setAccountId:@"xxxx"];
-    [[PAPagantis sharedInstance] setSignatureKey:@"xxxx"];
+    [[PAPagantis sharedInstance] setApiKey:@"0ffbf2a144c30e6a47c99a81877748e53b02c056393046a24e55b6d14e1f6fed"];
+    [[PAPagantis sharedInstance] setAccountId:@"tk_9f23e3b6c501381ad6728fa3"];
+    [[PAPagantis sharedInstance] setSignatureKey:@"e369441d71db8f91"];
     
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
