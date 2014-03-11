@@ -9,7 +9,7 @@ To install the SDK you can either download the source code of the latest release
     platform :ios, '6.0'
 	pod 'PagantisSDK'
 	
-And then you run `pod install` in the command line an CocoaPods will download the latest SDK.
+And then you run `pod install` in the command line where your `Podfile` is and CocoaPods will download the latest SDK release.
 
 
 Configuration
