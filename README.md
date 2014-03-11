@@ -15,7 +15,7 @@ And then you run `pod install` in the command line an CocoaPods will download th
 Configuration
 -------------
 
-First of all you need to configure the SDK. The best way to do that is in your `AppDelegate`. In the `application:didFinishLaunchingWithOptions:` method.
+First of all you need to configure the SDK. The best way to do that is in the `application:didFinishLaunchingWithOptions:` method of your `AppDelegate`.
 
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	    [[PAPagantis sharedInstance] setApiKey:@"xxxx"];
@@ -32,7 +32,7 @@ Overview
 
 The SDK has a singleton object that you can always access anywhere using `[PAPagantis sharedInstance]`. You will need to import `#import "PAPagantis.h"` first.
 
-Usually read-only operations can be done juast calling one method in that singleton. One example is retrieving the list of customers. Other operations, usually operations that modify data, require to create a `PA...Request` object. For example to create a customer you first create a `PACreateCustomerRequest` object, then you configure it with the desired values and finally you call the `createCustomer:completion:` method in the `PAPagantis` singleton.
+Usually read-only operations can be done just calling one method in the singleton object. One example is retrieving the list of customers. Other operations, usually operations that modify data, require to create a `PA...Request` object. For example to create a customer you first create a `PACreateCustomerRequest` object, then you configure it with the desired values and finally you call the `createCustomer:completion:` method in the `PAPagantis` singleton.
 
 Some operations at this moment for security reasons require you to use a `PAWebViewController` that contains a `UIWebView` where the user puts his/her payment card information. The SDK provides methods to create these `PAWebViewController`. In all cases the UI is minimal intentionally so you can configure how the screen is presented and dismissed. There is a special section in the documentation regarding how to present and personalize these screens.
 
@@ -327,7 +327,7 @@ Presenting and personalizing PAWebViewControllers
 =================================
 Some operations at this moment require to show a `PAWebViewController` that contains a `UIWebView` where the payment card information is filled. These `UIViewControllers` have a minimal UI intentionally so you can customize it.
 
-### Presenting inside a UINavigationController
+### Presenting it inside a UINavigationController
 
 If you are already using a `UINavigationController` it is very easy to present the `PAWebViewController`. Just use the following line to present the screen
 
@@ -339,7 +339,7 @@ And in the completion block pop the `PAWebViewController` this way:
 
 You can personalize the `navigationItem` of the `PAWebViewController` to put buttons on the left, on the right, as a `titleView`, etc.
 
-### Presenting as a modal screen
+### Presenting it as a modal screen
 
 If you want to present the screen modally the best way is to create a new `UINavigationController` and put the screen inside to finally present the `UINavigationController` modally. Since our new view controller is the first one inside the `UINavigationController` there is no back button and there is not a builtin way to dismiss the modally presented navigation controller. But this is easy to fix. In the following example we put a 'Close' button on the top-right corner.
 
@@ -396,7 +396,7 @@ You can use any library such as `SVProgressHUD` or whatever you prefer. Neverthe
 
 You can call `showActivityIndicator` or `showActivityIndicatorWithStyle:` as soon as you create the `PAWebViewController` and before presenting it. And then you should call `hideActivityIndicator` when the progress block is called when a value of `PAWebViewControllerLoaded`.
 
-The progress block receives a reference to the `PAWebViewController` to simplify working with blocks so inside the block it is better to use the passed argument if you want to interact with the `PAWebViewController` (for example to hide the activity indicator).
+The progress block receives a reference to the `PAWebViewController` to simplify working with blocks. So inside the block it is better to use the passed argument if you want to interact with the `PAWebViewController` (for example to hide the activity indicator).
 
 
 Reference
