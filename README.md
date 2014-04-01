@@ -297,6 +297,8 @@ Example:
 Subscriptions
 -------------
 
+### Create a subscription:
+
 To subscribe a user to a subscription you first create a `PACreateSubscriptionRequest` object. You need to define a few parameters such as the identifier of the plan you are subscribing the user to, and then you call `webViewControllerToCreateSubscription:progress:`.
 
 Example.
@@ -321,6 +323,113 @@ Example.
     
     [vc showActivityIndicator];
     [self.navigationController pushViewController:vc animated:YES];
+
+### Finding subscriptions:
+
+    [[PAPagantis sharedInstance] findSubscriptions:1 completion:^(NSError *error, NSArray *objects) {
+        if (error) {
+            NSLog(@"error %@", error);
+            return;
+        }
+        
+        NSLog(@"subscriptions %zd", objects.count);
+        for (PASubscription *subscription in objects) {
+            NSLog(@"identifier %@", subscription.identifier);
+            NSLog(@"status %@", subscription.status);
+            NSLog(@"customer %@ %@", subscription.customer.name, subscription.customer.email);
+            NSLog(@"plan %@", subscription.plan.name);
+            NSLog(@"");
+        }
+    }];
+
+
+### Find a subscription by its identifier:
+
+
+
+Payment requests
+----------------
+
+### Create a payment request:
+
+To create a payment request you first create a `PACreatePaymentRequest` object, fill it with the desired values and then you call `createPaymentRequest:completion:`. In the completion block you will receive a `PAPaymentRequest` object (unless something went wrong).
+
+    PACreatePaymentRequest *paymentRequest = [[PACreatePaymentRequest alloc] init];
+    paymentRequest.orderIdentifier = @"CPM1234";
+    paymentRequest.amount = 1000;
+    paymentRequest.currency = @"EUR";
+    paymentRequest.okURL = @"http://example.com/ok";
+    paymentRequest.nokURL = @"http://example.com/nok";
+    [[PAPagantis sharedInstance] createPaymentRequest:paymentRequest completion:^(NSError *error, PAPaymentRequest *paymentRequest) {
+        if (error) {
+            NSLog(@"error %@", error);
+            return;
+        }
+        
+        NSLog(@"identifier %@", paymentRequest.identifier);
+        NSLog(@"activities %zd", paymentRequest.activities.count);
+        for (PAActivity *activity in paymentRequest.activities) {
+            NSLog(@"activity %@", activity.activityType);
+        }
+    }];
+
+
+### Finding payment requests:
+
+You can ask the server for a list of payment requests. Just call `findPaymentRequests:completion` and you will receive an array of `PAPaymentRequest` objects. This method has one argument to indicate the page number so you can paginate the results.
+
+    [[PAPagantis sharedInstance] findPaymentRequests:1 completion:^(NSError *error, NSArray *objects) {
+        if (error) {
+            NSLog(@"error %@", error);
+            return;
+        }
+        
+        NSLog(@"payment requests %zd", objects.count);
+        for (PAPaymentRequest *paymentRequest in objects) {
+            NSLog(@"identifier %@", paymentRequest.identifier);
+            NSLog(@"activities %zd", paymentRequest.activities.count);
+            for (PAActivity *activity in paymentRequest.activities) {
+                NSLog(@"activity %@", activity.activityType);
+            }
+            NSLog(@"");
+        }
+    }];
+
+
+### Find a payment request by its identifier:
+
+If you need the details of a payment request and you know its identifier you can call the `findPaymentRequestWithIdentifier:completion:` method. If everything does well you will receive a `PAPaymentRequest` object with the information of the desired payment request as second argument. The first argument, as always, will be a `NSError` that will be `nil` if everything went ok.
+
+    [[PAPagantis sharedInstance] findPaymentRequestWithIdentifier:@"pay_2b99a09ee5bc2b22a75b8e87ce4813ee" completion:^(NSError *error, PAPaymentRequest *paymentRequest) {
+        if (error) {
+            NSLog(@"error %@", error);
+            return;
+        }
+        
+        NSLog(@"identifier %@", paymentRequest.identifier);
+        NSLog(@"activities %zd", paymentRequest.activities.count);
+        for (PAActivity *activity in paymentRequest.activities) {
+            NSLog(@"activity %@", activity.activityType);
+        }
+    }];
+
+
+### Cancel a payment request:
+
+You can cancel a payment request by calling the `cancelPaymentRequestWithIdentifier:completion:` method. If the payment request is cancelled successfully you will receive a `PAPaymentRequest` object.
+
+    [[PAPagantis sharedInstance] cancelPaymentRequestWithIdentifier:@"pay_2b99a09ee5bc2b22a75b8e87ce4813ee" completion:^(NSError *error, PAPaymentRequest *paymentRequest) {
+        if (error) {
+            NSLog(@"error %@", error);
+            return;
+        }
+        
+        NSLog(@"identifier %@", paymentRequest.identifier);
+        NSLog(@"activities %zd", paymentRequest.activities.count);
+        for (PAActivity *activity in paymentRequest.activities) {
+            NSLog(@"activity %@", activity.activityType);
+        }
+    }];
 
 
 Presenting and personalizing PAWebViewControllers

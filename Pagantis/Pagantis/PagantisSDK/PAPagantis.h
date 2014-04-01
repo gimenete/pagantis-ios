@@ -11,6 +11,8 @@
 #import "PACard.h"
 #import "PAPlan.h"
 #import "PACharge.h"
+#import "PASubscription.h"
+#import "PAPaymentRequest.h"
 #import "PAWebViewController.h"
 #import "PACreateChargeRequest.h"
 #import "PATokenizeCardRequest.h"
@@ -18,11 +20,14 @@
 #import "PACreateRefundRequest.h"
 #import "PACreateCustomerRequest.h"
 #import "PACreatePlanRequest.h"
+#import "PACreatePaymentRequest.h"
 
 typedef void(^CustomerCompletionBlock)(NSError *error, PACustomer *customer);
 typedef void(^CardCompletionBlock)(NSError *error, PACustomer *card);
 typedef void(^ChargeCompletionBlock)(NSError *error, PACharge *charge);
 typedef void(^PlanCompletionBlock)(NSError *error, PAPlan *plan);
+typedef void(^SubscriptionCompletionBlock)(NSError *error, PASubscription *subscription);
+typedef void(^PaymentRequestCompletionBlock)(NSError *error, PAPaymentRequest *paymentRequest);
 typedef void(^ArrayCompletionBlock)(NSError *error, NSArray *objects);
 
 @interface PAPagantis : NSObject
@@ -79,5 +84,19 @@ typedef void(^ArrayCompletionBlock)(NSError *error, NSArray *objects);
 - (PAWebViewController *)webViewControllerToCreateSubscription:(PACreateSubscriptionRequest *)subscriptionRequest
                                                       progress:(WebViewControllerProgressBlock)progress
                                                     completion:(WebViewControllerCompletionBlock)completion;
+
+- (void)findSubscriptions:(NSInteger)page completion:(ArrayCompletionBlock)completion;
+
+- (void)findSubscriptionWithIdentifier:(NSString*)identifier completion:(SubscriptionCompletionBlock)completion;
+
+/* payment requests */
+
+- (void)createPaymentRequest:(PACreatePaymentRequest*)paymentRequest completion:(PaymentRequestCompletionBlock)completion;
+
+- (void)findPaymentRequests:(NSInteger)page completion:(ArrayCompletionBlock)completion;
+
+- (void)findPaymentRequestWithIdentifier:(NSString*)identifier completion:(PaymentRequestCompletionBlock)completion;
+
+- (void)cancelPaymentRequestWithIdentifier:(NSString*)identifier completion:(PaymentRequestCompletionBlock)completion;
 
 @end

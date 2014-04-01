@@ -86,12 +86,14 @@
         if (self.completionBlock) {
             self.completionBlock(YES);
         }
+        return NO;
         
     } else if ([request.URL.description isEqualToString:@"http://localhost/nok"]) {
         
         if (self.completionBlock) {
             self.completionBlock(NO);
         }
+        return NO;
         
     }
     

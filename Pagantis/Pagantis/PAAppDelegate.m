@@ -14,9 +14,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[PAPagantis sharedInstance] setApiKey:@"0ffbf2a144c30e6a47c99a81877748e53b02c056393046a24e55b6d14e1f6fed"];
-    [[PAPagantis sharedInstance] setAccountId:@"tk_9f23e3b6c501381ad6728fa3"];
-    [[PAPagantis sharedInstance] setSignatureKey:@"e369441d71db8f91"];
+    [[PAPagantis sharedInstance] setApiKey:@"xxxx"];
+    [[PAPagantis sharedInstance] setAccountId:@"xxxx"];
+    [[PAPagantis sharedInstance] setSignatureKey:@"xxxx"];
     
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -28,147 +28,89 @@
     self.window.rootViewController = nc;
     [self.window makeKeyAndVisible];
     
-    /*
-    PACreateCustomerRequest *customerRequest = [[PACreateCustomerRequest alloc] init];
-    customerRequest.name = @"John Snow";
-    customerRequest.email = @"john@example.com";
-    customerRequest.reference = @"ref_john";
-    [[PAPagantis sharedInstance] createCustomer:customerRequest completion:^(NSError *error, PACustomer *customer) {
-        
+    [[PAPagantis sharedInstance] findSubscriptions:1 completion:^(NSError *error, NSArray *objects) {
         if (error) {
             NSLog(@"error %@", error);
             return;
         }
         
-        NSLog(@"name %@", customer.name);
-        NSLog(@"email %@", customer.email);
-        NSLog(@"reference %@", customer.reference);
-        NSLog(@"id %@", customer.identifier);
+        NSLog(@"subscriptions %zd", objects.count);
+        for (PASubscription *subscription in objects) {
+            NSLog(@"identifier %@", subscription.identifier);
+            NSLog(@"status %@", subscription.status);
+            NSLog(@"customer %@ %@", subscription.customer.name, subscription.customer.email);
+            NSLog(@"plan %@", subscription.plan.name);
+            NSLog(@"");
+        }
+    }];
+    
+    /*
+    PACreatePaymentRequest *paymentRequest = [[PACreatePaymentRequest alloc] init];
+    paymentRequest.orderIdentifier = @"CPM1234";
+    paymentRequest.amount = 1000;
+    paymentRequest.currency = @"EUR";
+    paymentRequest.okURL = @"http://example.com/ok";
+    paymentRequest.nokURL = @"http://example.com/nok";
+    [[PAPagantis sharedInstance] createPaymentRequest:paymentRequest completion:^(NSError *error, PAPaymentRequest *paymentRequest) {
+        if (error) {
+            NSLog(@"error %@", error);
+            return;
+        }
         
+        NSLog(@"identifier %@", paymentRequest.identifier);
+        NSLog(@"activities %zd", paymentRequest.activities.count);
+        for (PAActivity *activity in paymentRequest.activities) {
+            NSLog(@"activity %@", activity.activityType);
+        }
+    }];
+    */
+    
+    /*
+    [[PAPagantis sharedInstance] findPaymentRequestWithIdentifier:@"pay_2b99a09ee5bc2b22a75b8e87ce4813ee" completion:^(NSError *error, PAPaymentRequest *paymentRequest) {
+        if (error) {
+            NSLog(@"error %@", error);
+            return;
+        }
+        
+        NSLog(@"identifier %@", paymentRequest.identifier);
+        NSLog(@"activities %zd", paymentRequest.activities.count);
+        for (PAActivity *activity in paymentRequest.activities) {
+            NSLog(@"activity %@", activity.activityType);
+        }
     }];
      */
     
     /*
-    [[PAPagantis sharedInstance] findCustomers:1 completion:^(NSError *error, NSArray *customers) {
-        
+    [[PAPagantis sharedInstance] cancelPaymentRequestWithIdentifier:@"pay_2b99a09ee5bc2b22a75b8e87ce4813ee" completion:^(NSError *error, PAPaymentRequest *paymentRequest) {
         if (error) {
             NSLog(@"error %@", error);
             return;
         }
         
-        for (PACustomer *customer in customers) {
-            NSLog(@"---------");
-            NSLog(@"name %@", customer.name);
-            NSLog(@"email %@", customer.email);
-            NSLog(@"reference %@", customer.reference);
-            NSLog(@"id %@", customer.identifier);
+        NSLog(@"identifier %@", paymentRequest.identifier);
+        NSLog(@"activities %zd", paymentRequest.activities.count);
+        for (PAActivity *activity in paymentRequest.activities) {
+            NSLog(@"activity %@", activity.activityType);
         }
+    }];
+     */
 
-    }];
-     */
-    
     /*
-    [[PAPagantis sharedInstance] findCustomerWithIdentifier:@"cus_c252e8ab8b20811ffd6cfbbd0c11af69" completion:^(NSError *error, PACustomer *customer) {
-        
+    [[PAPagantis sharedInstance] findPaymentRequests:1 completion:^(NSError *error, NSArray *objects) {
         if (error) {
             NSLog(@"error %@", error);
             return;
         }
         
-        NSLog(@"name %@", customer.name);
-        NSLog(@"email %@", customer.email);
-        NSLog(@"reference %@", customer.reference);
-        NSLog(@"id %@", customer.identifier);
-    }];
-     */
-    
-    /*
-    PACreatePlanRequest *planRequest = [[PACreatePlanRequest alloc] init];
-    planRequest.name = @"Bronze plan";
-    planRequest.amount = 4999;
-    planRequest.currency = @"EUR";
-    planRequest.periodLong = 1;
-    planRequest.periodCycle = @"month";
-    [[PAPagantis sharedInstance] createPlan:planRequest completion:^(NSError *error, PAPlan *plan) {
-        
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
+        NSLog(@"payment requests %zd", objects.count);
+        for (PAPaymentRequest *paymentRequest in objects) {
+            NSLog(@"identifier %@", paymentRequest.identifier);
+            NSLog(@"activities %zd", paymentRequest.activities.count);
+            for (PAActivity *activity in paymentRequest.activities) {
+                NSLog(@"activity %@", activity.activityType);
+            }
+            NSLog(@"");
         }
-        
-        NSLog(@"name %@", plan.name);
-        NSLog(@"id %@", plan.identifier);
-        
-    }];
-     */
-    
-    /*
-    [[PAPagantis sharedInstance] findPlans:1 completion:^(NSError *error, NSArray *objects) {
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        for (PAPlan *plan in objects) {
-            NSLog(@"----------");
-            NSLog(@"name %@", plan.name);
-            NSLog(@"id %@", plan.identifier);
-        }
-    }];
-     */
-    
-    /*
-    [[PAPagantis sharedInstance] findPlanWithIdentifier:@"pla_a422185ba306983fb8c259ac35c40929" completion:^(NSError *error, PAPlan *plan) {
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        NSLog(@"name %@", plan.name);
-        NSLog(@"id %@", plan.identifier);
-    }];
-     */
-    
-    /*
-    [[PAPagantis sharedInstance] findCharges:1 completion:^(NSError *error, NSArray *charges) {
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        NSLog(@"objects %d", charges.count);
-        for (PACharge *charge in charges) {
-            NSLog(@"charge %@ %@", charge.orderDescription, charge.identifier);
-        }
-    }];
-     */
-    
-    /*
-    [[PAPagantis sharedInstance] findChargeWithIdentifier:@"cha_f54899832a0d1f1a4eb6be78aa63755c" completion:^(NSError *error, PACharge *charge) {
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        NSLog(@"amount %zd", charge.amount);
-        NSLog(@"refunded %@", charge.refunded?@"yes":@"no");
-        for (PARefund *refund in charge.refunds) {
-            NSLog(@"refund %zd", refund.amount);
-        }
-    }];
-     */
-    
-    /*
-    PACreateRefundRequest *refund = [[PACreateRefundRequest alloc] init];
-    refund.chargeIdentifier = @"cha_f54899832a0d1f1a4eb6be78aa63755c";
-    refund.amount = 10;
-    [[PAPagantis sharedInstance] refundCharge:refund completion:^(NSError *error, PACharge *charge) {
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        NSLog(@"objects %@", charge.refunds);
     }];
      */
     

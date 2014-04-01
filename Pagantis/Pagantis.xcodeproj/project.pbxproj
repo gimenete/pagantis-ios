@@ -34,6 +34,9 @@
 		097FBF7318C100380030371A /* PACreateCustomerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 097FBF7218C100380030371A /* PACreateCustomerRequest.m */; };
 		097FBF7618C100B60030371A /* PACreatePlanRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 097FBF7518C100B60030371A /* PACreatePlanRequest.m */; };
 		0983EBE218C0D96200776E87 /* PAHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0983EBE118C0D96200776E87 /* PAHomeViewController.m */; };
+		098FCA7418EB1C89005A93B0 /* PASubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 098FCA7318EB1C89005A93B0 /* PASubscription.m */; };
+		098FCA7718EB1D00005A93B0 /* PAPaymentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 098FCA7618EB1D00005A93B0 /* PAPaymentRequest.m */; };
+		098FCA7A18EB2435005A93B0 /* PACreatePaymentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 098FCA7918EB2435005A93B0 /* PACreatePaymentRequest.m */; };
 		09EAEE9318C0204300A66937 /* PAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 09EAEE9218C0204300A66937 /* PAUtils.m */; };
 		09EAEE9618C021A300A66937 /* PAWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09EAEE9518C021A300A66937 /* PAWebViewController.m */; };
 		09EAEE9918C0311B00A66937 /* PACreateChargeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 09EAEE9818C0311B00A66937 /* PACreateChargeRequest.m */; };
@@ -97,6 +100,12 @@
 		097FBF7518C100B60030371A /* PACreatePlanRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACreatePlanRequest.m; sourceTree = "<group>"; };
 		0983EBE018C0D96200776E87 /* PAHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAHomeViewController.h; sourceTree = "<group>"; };
 		0983EBE118C0D96200776E87 /* PAHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAHomeViewController.m; sourceTree = "<group>"; };
+		098FCA7218EB1C89005A93B0 /* PASubscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASubscription.h; sourceTree = "<group>"; };
+		098FCA7318EB1C89005A93B0 /* PASubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASubscription.m; sourceTree = "<group>"; };
+		098FCA7518EB1D00005A93B0 /* PAPaymentRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPaymentRequest.h; sourceTree = "<group>"; };
+		098FCA7618EB1D00005A93B0 /* PAPaymentRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPaymentRequest.m; sourceTree = "<group>"; };
+		098FCA7818EB2435005A93B0 /* PACreatePaymentRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACreatePaymentRequest.h; sourceTree = "<group>"; };
+		098FCA7918EB2435005A93B0 /* PACreatePaymentRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACreatePaymentRequest.m; sourceTree = "<group>"; };
 		09EAEE9118C0204300A66937 /* PAUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAUtils.h; sourceTree = "<group>"; };
 		09EAEE9218C0204300A66937 /* PAUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAUtils.m; sourceTree = "<group>"; };
 		09EAEE9418C021A300A66937 /* PAWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAWebViewController.h; sourceTree = "<group>"; };
@@ -244,6 +253,12 @@
 				097FBF7218C100380030371A /* PACreateCustomerRequest.m */,
 				097FBF7418C100B60030371A /* PACreatePlanRequest.h */,
 				097FBF7518C100B60030371A /* PACreatePlanRequest.m */,
+				098FCA7218EB1C89005A93B0 /* PASubscription.h */,
+				098FCA7318EB1C89005A93B0 /* PASubscription.m */,
+				098FCA7518EB1D00005A93B0 /* PAPaymentRequest.h */,
+				098FCA7618EB1D00005A93B0 /* PAPaymentRequest.m */,
+				098FCA7818EB2435005A93B0 /* PACreatePaymentRequest.h */,
+				098FCA7918EB2435005A93B0 /* PACreatePaymentRequest.m */,
 			);
 			path = PagantisSDK;
 			sourceTree = "<group>";
@@ -295,7 +310,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PA;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Pagantis - TPS";
 				TargetAttributes = {
 					09132A4918BBA82E003E6CB2 = {
@@ -382,11 +397,14 @@
 				09132A6718BBAFDA003E6CB2 /* PACharge.m in Sources */,
 				097FBF7618C100B60030371A /* PACreatePlanRequest.m in Sources */,
 				097FBF6418C0DFA50030371A /* PAActivity.m in Sources */,
+				098FCA7718EB1D00005A93B0 /* PAPaymentRequest.m in Sources */,
 				09EAEE9318C0204300A66937 /* PAUtils.m in Sources */,
 				0983EBE218C0D96200776E87 /* PAHomeViewController.m in Sources */,
 				09132A7318BBBB89003E6CB2 /* NSDictionary+SanityChecks.m in Sources */,
 				09132A6D18BBB003003E6CB2 /* PAPlan.m in Sources */,
+				098FCA7A18EB2435005A93B0 /* PACreatePaymentRequest.m in Sources */,
 				097FBF7018C0F7790030371A /* PACreateRefundRequest.m in Sources */,
+				098FCA7418EB1C89005A93B0 /* PASubscription.m in Sources */,
 				09EAEE9618C021A300A66937 /* PAWebViewController.m in Sources */,
 				09132A3F18BBA82E003E6CB2 /* main.m in Sources */,
 				09132A4318BBA82E003E6CB2 /* PAAppDelegate.m in Sources */,
@@ -444,7 +462,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -484,7 +501,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -545,7 +561,6 @@
 		09132A5F18BBA82E003E6CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Pagantis.app/Pagantis";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -568,7 +583,6 @@
 		09132A6018BBA82E003E6CB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Pagantis.app/Pagantis";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

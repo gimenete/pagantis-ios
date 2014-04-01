@@ -476,6 +476,8 @@
     return vc;
 }
 
+/* subscriptions */
+
 - (PAWebViewController *)webViewControllerToCreateSubscription:(PACreateSubscriptionRequest *)subscriptionRequest
                                                       progress:(WebViewControllerProgressBlock)progress
                                                     completion:(WebViewControllerCompletionBlock)completion {
@@ -526,5 +528,187 @@
     vc.completionBlock = completion;
     return vc;
 }
+
+- (void)findSubscriptions:(NSInteger)page completion:(ArrayCompletionBlock)completion {
+    AFHTTPRequestOperationManager *manager = [self manager];
+    
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    [parameters setObject:[NSNumber numberWithInteger:page] forKey:@"page"];
+    
+    NSString *urlString = [self urlWithPath:@"/subscriptions"];
+    AFHTTPRequestOperation *operation = [manager GET:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if (completion) {
+            NSArray *response = [self findResponseArray:responseObject];
+            if (!response) {
+                completion([self errorWithMessage:@"Unexpected server response"], nil);
+                return;
+            }
+            
+            NSMutableArray *objects = [[NSMutableArray alloc] initWithCapacity:response.count];
+            for (NSDictionary *dict in response) {
+                PASubscription *subscription = [PASubscription subscriptionWithDictionary:dict];
+                [objects addObject:subscription];
+            }
+            completion(nil, objects);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (completion) {
+            completion([self errorFromRequestOperation:operation withError:error], nil);
+        }
+    }];
+    operation.responseSerializer = [[AFJSONResponseSerializer alloc] init];
+    [operation start];
+}
+
+- (void)findSubscriptionWithIdentifier:(NSString*)identifier completion:(SubscriptionCompletionBlock)completion {
+    AFHTTPRequestOperationManager *manager = [self manager];
+    
+    NSString *urlString = [self urlWithPath:[@"/subscriptions/" stringByAppendingString:identifier]];
+    AFHTTPRequestOperation *operation = [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if (completion) {
+            NSDictionary *response = [self findResponseDictionary:responseObject];
+            if (!response) {
+                completion([self errorWithMessage:@"Unexpected server response"], nil);
+                return;
+            }
+            
+            PASubscription *subscription = [PASubscription subscriptionWithDictionary:response];
+            completion(nil, subscription);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (completion) {
+            completion([self errorFromRequestOperation:operation withError:error], nil);
+        }
+    }];
+    operation.responseSerializer = [[AFJSONResponseSerializer alloc] init];
+    [operation start];
+}
+
+/* payment requests */
+
+- (void)createPaymentRequest:(PACreatePaymentRequest*)paymentRequest completion:(PaymentRequestCompletionBlock)completion {
+    AFHTTPRequestOperationManager *manager = [self manager];
+    
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    [parameters setObject:paymentRequest.orderIdentifier forKey:@"payment_request[order_id]"];
+    [parameters setObject:[NSString stringWithFormat:@"%zd", paymentRequest.amount] forKey:@"payment_request[amount]"];
+    [parameters setObject:paymentRequest.currency forKey:@"payment_request[currency]"];
+    [parameters setObject:paymentRequest.okURL forKey:@"payment_request[ok_url]"];
+    [parameters setObject:paymentRequest.nokURL forKey:@"payment_request[nok_url]"];
+    
+    // TODO: custom fields
+    
+    NSString *urlString = [self urlWithPath:@"/payment_requests"];
+    AFHTTPRequestOperation *operation = [manager POST:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if (completion) {
+            NSDictionary *response = [self findResponseDictionary:responseObject];
+            if (!response) {
+                completion([self errorWithMessage:@"Unexpected server response"], nil);
+                return;
+            }
+            
+            PAPaymentRequest *payment = [PAPaymentRequest paymentRequestWithDictionary:response];
+            completion(nil, payment);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (completion) {
+            completion([self errorFromRequestOperation:operation withError:error], nil);
+        }
+    }];
+    operation.responseSerializer = [[AFJSONResponseSerializer alloc] init];
+    [operation start];
+}
+
+- (void)findPaymentRequests:(NSInteger)page completion:(ArrayCompletionBlock)completion {
+    AFHTTPRequestOperationManager *manager = [self manager];
+    
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    [parameters setObject:[NSNumber numberWithInteger:page] forKey:@"page"];
+    
+    NSString *urlString = [self urlWithPath:@"/payment_requests"];
+    AFHTTPRequestOperation *operation = [manager GET:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if (completion) {
+            NSArray *response = [self findResponseArray:responseObject];
+            if (!response) {
+                completion([self errorWithMessage:@"Unexpected server response"], nil);
+                return;
+            }
+            
+            NSMutableArray *objects = [[NSMutableArray alloc] initWithCapacity:response.count];
+            for (NSDictionary *dict in response) {
+                PAPaymentRequest *paymentRequest = [PAPaymentRequest paymentRequestWithDictionary:dict];
+                [objects addObject:paymentRequest];
+            }
+            completion(nil, objects);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (completion) {
+            completion([self errorFromRequestOperation:operation withError:error], nil);
+        }
+    }];
+    operation.responseSerializer = [[AFJSONResponseSerializer alloc] init];
+    [operation start];
+}
+
+- (void)findPaymentRequestWithIdentifier:(NSString*)identifier completion:(PaymentRequestCompletionBlock)completion {
+    AFHTTPRequestOperationManager *manager = [self manager];
+    
+    NSString *urlString = [self urlWithPath:[@"/payment_requests/" stringByAppendingString:identifier]];
+    AFHTTPRequestOperation *operation = [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if (completion) {
+            NSDictionary *response = [self findResponseDictionary:responseObject];
+            if (!response) {
+                completion([self errorWithMessage:@"Unexpected server response"], nil);
+                return;
+            }
+            
+            PAPaymentRequest *paymentRequest = [PAPaymentRequest paymentRequestWithDictionary:response];
+            completion(nil, paymentRequest);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (completion) {
+            completion([self errorFromRequestOperation:operation withError:error], nil);
+        }
+    }];
+    operation.responseSerializer = [[AFJSONResponseSerializer alloc] init];
+    [operation start];
+}
+
+- (void)cancelPaymentRequestWithIdentifier:(NSString*)identifier completion:(PaymentRequestCompletionBlock)completion {
+    AFHTTPRequestOperationManager *manager = [self manager];
+    
+    NSString *urlString = [self urlWithPath:[@"/payment_requests/" stringByAppendingString:identifier]];
+    AFHTTPRequestOperation *operation = [manager DELETE:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if (completion) {
+            NSDictionary *response = [self findResponseDictionary:responseObject];
+            if (!response) {
+                completion([self errorWithMessage:@"Unexpected server response"], nil);
+                return;
+            }
+            
+            PAPaymentRequest *paymentRequest = [PAPaymentRequest paymentRequestWithDictionary:response];
+            completion(nil, paymentRequest);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (completion) {
+            completion([self errorFromRequestOperation:operation withError:error], nil);
+        }
+    }];
+    operation.responseSerializer = [[AFJSONResponseSerializer alloc] init];
+    [operation start];
+}
+
 
 @end
