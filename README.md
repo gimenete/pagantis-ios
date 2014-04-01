@@ -345,6 +345,20 @@ Example.
 
 ### Find a subscription by its identifier:
 
+If you want to fetch the information of subscription of which you know its identifier you can call the method `findSubscriptionWithIdentifier:completion:` and you will receive a `PASubscription` object with that information. Example:
+
+    [[PAPagantis sharedInstance] findSubscriptionWithIdentifier:@"sub_218802e1355c286aa2bb5f019d3f1388" completion:^(NSError *error, PASubscription *subscription) {
+        
+        if (error) {
+            NSLog(@"error %@", error);
+            return;
+        }
+        NSLog(@"identifier %@", subscription.identifier);
+        NSLog(@"status %@", subscription.status);
+        NSLog(@"customer %@", subscription.customer.identifier);
+        NSLog(@"plan %@", subscription.plan.name);
+    }];
+
 
 
 Payment requests

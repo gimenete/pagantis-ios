@@ -226,7 +226,6 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"response %@", operation.responseString);
         if (completion) {
             completion([self errorFromRequestOperation:operation withError:error], nil);
         }
@@ -499,10 +498,11 @@
     NSString *description = subscriptionRequest.orderDescription;
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [params setObject:@"TOKEN"                forKey:@"transaction_type"];
+    [params setObject:@"SUBSCRIPTION"         forKey:@"operation"];
     [params setObject:@"SHA1"                 forKey:@"auth_method"];
     [params setObject:orderIdentifier         forKey:@"order_id"];
     [params setObject:userIdentifier          forKey:@"user_id"];
+    [params setObject:planIdentifier          forKey:@"plan_id"];
     [params setObject:amount                  forKey:@"amount"];
     [params setObject:currency                forKey:@"currency"];
     [params setObject:description             forKey:@"description"];

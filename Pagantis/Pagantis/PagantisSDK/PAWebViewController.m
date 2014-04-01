@@ -46,8 +46,7 @@
     
     NSString *bodyString = [PAUtils queryString:self.postParams];
     
-    NSString *urlString = [[PAPagantis sharedInstance] urlWithPath:@"/sale"];
-    urlString = @"https://psp.pagantis.com/2/sale";
+    NSString *urlString = @"https://psp.pagantis.com/2/sale";
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
