@@ -123,7 +123,7 @@
     [params setObject:@"http://localhost/nok" forKey:@"nok_url"];
     [params setObject:self.theAccountId       forKey:@"account_id"];
     
-    NSMutableString *baseString = [[NSMutableString alloc] initWithString:@"e369441d71db8f91"];
+    NSMutableString *baseString = [[NSMutableString alloc] initWithString:self.theSignatureKey];
     [baseString appendString:[params stringForKey:@"account_id"]];
     [baseString appendString:[params stringForKey:@"order_id"]];
     [baseString appendString:[params stringForKey:@"amount"]];
@@ -456,7 +456,7 @@
     [params setObject:@"http://localhost/nok" forKey:@"nok_url"];
     [params setObject:self.theAccountId       forKey:@"account_id"];
     
-    NSMutableString *baseString = [[NSMutableString alloc] initWithString:@"e369441d71db8f91"];
+    NSMutableString *baseString = [[NSMutableString alloc] initWithString:self.theSignatureKey];
     [baseString appendString:[params stringForKey:@"account_id"]];
     [baseString appendString:[params stringForKey:@"order_id"]];
     [baseString appendString:[params stringForKey:@"amount"]];
@@ -510,7 +510,7 @@
     [params setObject:@"http://localhost/nok" forKey:@"nok_url"];
     [params setObject:self.theAccountId       forKey:@"account_id"];
     
-    NSMutableString *baseString = [[NSMutableString alloc] initWithString:@"e369441d71db8f91"];
+    NSMutableString *baseString = [[NSMutableString alloc] initWithString:self.theSignatureKey];
     [baseString appendString:[params stringForKey:@"account_id"]];
     [baseString appendString:[params stringForKey:@"order_id"]];
     [baseString appendString:[params stringForKey:@"amount"]];
