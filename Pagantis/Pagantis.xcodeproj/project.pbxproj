@@ -25,6 +25,7 @@
 		09132A6D18BBB003003E6CB2 /* PAPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 09132A6C18BBB003003E6CB2 /* PAPlan.m */; };
 		09132A7018BBB01C003E6CB2 /* PACard.m in Sources */ = {isa = PBXBuildFile; fileRef = 09132A6F18BBB01C003E6CB2 /* PACard.m */; };
 		09132A7318BBBB89003E6CB2 /* NSDictionary+SanityChecks.m in Sources */ = {isa = PBXBuildFile; fileRef = 09132A7218BBBB89003E6CB2 /* NSDictionary+SanityChecks.m */; };
+		097D38F518FD736400CC8579 /* PAListingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 097D38F418FD736400CC8579 /* PAListingController.m */; };
 		097FBF6118C0DCE70030371A /* PASale.m in Sources */ = {isa = PBXBuildFile; fileRef = 097FBF6018C0DCE70030371A /* PASale.m */; };
 		097FBF6418C0DFA50030371A /* PAActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 097FBF6318C0DFA50030371A /* PAActivity.m */; };
 		097FBF6718C0E11B0030371A /* PARefund.m in Sources */ = {isa = PBXBuildFile; fileRef = 097FBF6618C0E11B0030371A /* PARefund.m */; };
@@ -82,6 +83,8 @@
 		09132A6F18BBB01C003E6CB2 /* PACard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACard.m; sourceTree = "<group>"; };
 		09132A7118BBBB89003E6CB2 /* NSDictionary+SanityChecks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SanityChecks.h"; sourceTree = "<group>"; };
 		09132A7218BBBB89003E6CB2 /* NSDictionary+SanityChecks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SanityChecks.m"; sourceTree = "<group>"; };
+		097D38F318FD736400CC8579 /* PAListingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAListingController.h; sourceTree = "<group>"; };
+		097D38F418FD736400CC8579 /* PAListingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAListingController.m; sourceTree = "<group>"; };
 		097FBF5F18C0DCE70030371A /* PASale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASale.h; sourceTree = "<group>"; };
 		097FBF6018C0DCE70030371A /* PASale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASale.m; sourceTree = "<group>"; };
 		097FBF6218C0DFA50030371A /* PAActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAActivity.h; sourceTree = "<group>"; };
@@ -183,6 +186,8 @@
 				09132A3918BBA82E003E6CB2 /* Supporting Files */,
 				0983EBE018C0D96200776E87 /* PAHomeViewController.h */,
 				0983EBE118C0D96200776E87 /* PAHomeViewController.m */,
+				097D38F318FD736400CC8579 /* PAListingController.h */,
+				097D38F418FD736400CC8579 /* PAListingController.m */,
 			);
 			path = Pagantis;
 			sourceTree = "<group>";
@@ -409,6 +414,7 @@
 				09132A3F18BBA82E003E6CB2 /* main.m in Sources */,
 				09132A4318BBA82E003E6CB2 /* PAAppDelegate.m in Sources */,
 				097FBF6718C0E11B0030371A /* PARefund.m in Sources */,
+				097D38F518FD736400CC8579 /* PAListingController.m in Sources */,
 				09132A6A18BBAFF1003E6CB2 /* PACustomer.m in Sources */,
 				09132A7018BBB01C003E6CB2 /* PACard.m in Sources */,
 				09132A6418BBA86E003E6CB2 /* PAPagantis.m in Sources */,
