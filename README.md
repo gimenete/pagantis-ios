@@ -6,8 +6,11 @@ Installation
 
 To install the SDK you can either download the source code of the latest release and copy the `PagantisSDK` folder to your project or install it using CocoaPods (coming soon). The minimal `Podfile` would be something like this:
 
+```ruby
+    source 'https://github.com/CocoaPods/Specs.git'
     platform :ios, '6.0'
-	pod 'PagantisSDK'
+    pod 'PagantisSDK'
+```
 	
 And then you run `pod install` in the command line where your `Podfile` is and CocoaPods will download the latest SDK release.
 
