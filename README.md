@@ -17,14 +17,18 @@ Configuration
 
 First of all you need to configure the SDK. The best way to do that is in the `application:didFinishLaunchingWithOptions:` method of your `AppDelegate`.
 
-	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	    [[PAPagantis sharedInstance] setApiKey:@"xxxx"];
-    	[[PAPagantis sharedInstance] setAccountId:@"xxxx"];
-	    [[PAPagantis sharedInstance] setSignatureKey:@"xxx"];
-	    
-	    // Usual code here...
-	}
-	
+```objective-c
+#import <PAPagantis.h>
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[PAPagantis sharedInstance] setApiKey:@"xxxx"];
+	[[PAPagantis sharedInstance] setAccountId:@"xxxx"];
+    [[PAPagantis sharedInstance] setSignatureKey:@"xxx"];
+    
+    // Usual code here...
+}
+```
+
 You will find the parameters to configure the SDK in the [Configuration → API](https://bo.pagantis.com/api) section of the control panel.
 
 Overview
@@ -53,47 +57,49 @@ To create a new customer you first create a `PACreateCustomerRequest` object, th
 The completion block receives a `NSError` if something went wrong, or `nil` if everything went fine. The second argument is a `PACustomer` object with the information of the created customer. In this object you can get for example the `identifier` created by the backend.
 
 Example:
-    
-    PACreateCustomerRequest *customerRequest = [[PACreateCustomerRequest alloc] init];
-    customerRequest.name = @"John Snow";
-    customerRequest.email = @"john@example.com";
-    customerRequest.reference = @"ref_john";
-    [[PAPagantis sharedInstance] createCustomer:customerRequest completion:^(NSError *error, PACustomer *customer) {
-        
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        NSLog(@"name %@", customer.name);
-        NSLog(@"email %@", customer.email);
-        NSLog(@"reference %@", customer.reference);
-        NSLog(@"id %@", customer.identifier);
-        
-    }];
 
+```objective-c
+PACreateCustomerRequest *customerRequest = [[PACreateCustomerRequest alloc] init];
+customerRequest.name = @"John Snow";
+customerRequest.email = @"john@example.com";
+customerRequest.reference = @"ref_john";
+[[PAPagantis sharedInstance] createCustomer:customerRequest completion:^(NSError *error, PACustomer *customer) {
+    
+    if (error) {
+        NSLog(@"error %@", error);
+        return;
+    }
+    
+    NSLog(@"name %@", customer.name);
+    NSLog(@"email %@", customer.email);
+    NSLog(@"reference %@", customer.reference);
+    NSLog(@"id %@", customer.identifier);
+    
+}];
+```
 
 ### Finding customers
 
 There is a simple method to find customers that were created previously. This method accepts one parameter that is the page number in the list of results. The completion block receives an `NSError` as first parameter if something went wrong, or `nil` otherwise. The second parameter is an `NSArray` of `PACustomer` objects.
 
-    [[PAPagantis sharedInstance] findCustomers:1 completion:^(NSError *error, NSArray *customers) {
-        
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        for (PACustomer *customer in customers) {
-            NSLog(@"---------");
-            NSLog(@"name %@", customer.name);
-            NSLog(@"email %@", customer.email);
-            NSLog(@"reference %@", customer.reference);
-            NSLog(@"id %@", customer.identifier);
-        }
+```objective-c
+[[PAPagantis sharedInstance] findCustomers:1 completion:^(NSError *error, NSArray *customers) {
+    
+    if (error) {
+        NSLog(@"error %@", error);
+        return;
+    }
+    
+    for (PACustomer *customer in customers) {
+        NSLog(@"---------");
+        NSLog(@"name %@", customer.name);
+        NSLog(@"email %@", customer.email);
+        NSLog(@"reference %@", customer.reference);
+        NSLog(@"id %@", customer.identifier);
+    }
 
-    }];
-
+}];
+```
 
 ### Find a customer by its identifier
 
@@ -101,18 +107,20 @@ If you wish to read the information of a customer and you know its identifier yo
 
 Example:
 
-    [[PAPagantis sharedInstance] findCustomerWithIdentifier:@"cus_c252e8ab8b20811aad6cfbbd0c00af69" completion:^(NSError *error, PACustomer *customer) {
-        
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        NSLog(@"name %@", customer.name);
-        NSLog(@"email %@", customer.email);
-        NSLog(@"reference %@", customer.reference);
-        NSLog(@"id %@", customer.identifier);
-    }];
+```objective-c
+[[PAPagantis sharedInstance] findCustomerWithIdentifier:@"cus_c252e8ab8b20811aad6cfbbd0c00af69" completion:^(NSError *error, PACustomer *customer) {
+    
+    if (error) {
+        NSLog(@"error %@", error);
+        return;
+    }
+    
+    NSLog(@"name %@", customer.name);
+    NSLog(@"email %@", customer.email);
+    NSLog(@"reference %@", customer.reference);
+    NSLog(@"id %@", customer.identifier);
+}];
+```
 
 Plans
 -----
@@ -129,23 +137,25 @@ To create a plan you first create a `PACreatePlanRequest` object. Then you fill 
 
 Example:
 
-    PACreatePlanRequest *planRequest = [[PACreatePlanRequest alloc] init];
-    planRequest.name = @"Bronze plan";
-    planRequest.amount = 4999;
-    planRequest.currency = @"EUR";
-    planRequest.periodLong = 1;
-    planRequest.periodCycle = @"month";
-    [[PAPagantis sharedInstance] createPlan:planRequest completion:^(NSError *error, PAPlan *plan) {
-        
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        NSLog(@"name %@", plan.name);
-        NSLog(@"id %@", plan.identifier);
-        
-    }];
+```objective-c
+PACreatePlanRequest *planRequest = [[PACreatePlanRequest alloc] init];
+planRequest.name = @"Bronze plan";
+planRequest.amount = 4999;
+planRequest.currency = @"EUR";
+planRequest.periodLong = 1;
+planRequest.periodCycle = @"month";
+[[PAPagantis sharedInstance] createPlan:planRequest completion:^(NSError *error, PAPlan *plan) {
+    
+    if (error) {
+        NSLog(@"error %@", error);
+        return;
+    }
+    
+    NSLog(@"name %@", plan.name);
+    NSLog(@"id %@", plan.identifier);
+    
+}];
+```
 
 ### Find plans
 
@@ -153,18 +163,20 @@ To retrieve a list of plans you just call the `findPlans:completion:` method. Th
 
 Example:
 
-    [[PAPagantis sharedInstance] findPlans:1 completion:^(NSError *error, NSArray *objects) {
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        for (PAPlan *plan in objects) {
-            NSLog(@"----------");
-            NSLog(@"name %@", plan.name);
-            NSLog(@"id %@", plan.identifier);
-        }
-    }];
+```objective-c
+[[PAPagantis sharedInstance] findPlans:1 completion:^(NSError *error, NSArray *objects) {
+    if (error) {
+        NSLog(@"error %@", error);
+        return;
+    }
+    
+    for (PAPlan *plan in objects) {
+        NSLog(@"----------");
+        NSLog(@"name %@", plan.name);
+        NSLog(@"id %@", plan.identifier);
+    }
+}];
+```
 
 ### Find a plan using its identifier
 
@@ -172,15 +184,17 @@ If you want to retrieve the information of a plan and you know its identifier yo
 
 Example:
 
-    [[PAPagantis sharedInstance] findPlanWithIdentifier:@"pla_b422185ba306983fd8c259ac35c40929" completion:^(NSError *error, PAPlan *plan) {
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        NSLog(@"name %@", plan.name);
-        NSLog(@"id %@", plan.identifier);
-    }];
+```objective-c
+[[PAPagantis sharedInstance] findPlanWithIdentifier:@"pla_b422185ba306983fd8c259ac35c40929" completion:^(NSError *error, PAPlan *plan) {
+    if (error) {
+        NSLog(@"error %@", error);
+        return;
+    }
+    
+    NSLog(@"name %@", plan.name);
+    NSLog(@"id %@", plan.identifier);
+}];
+```
 
 Charges
 -------
@@ -191,25 +205,27 @@ To make a simple charge you first create a `PACreateChargeRequest` object and fi
 
 Example:
 
-    PACreateChargeRequest *charge = [[PACreateChargeRequest alloc] init];
-    charge.currency = @"EUR";
-    charge.amount = 100;
-    charge.orderDescription = @"Precio de alta";
-    
-    PAWebViewController *vc = [[PAPagantis sharedInstance] webViewControllerToCreateCharge:charge progress:^(PAWebViewController *webViewController, PAWebViewControllerProgress progress) {
-        if (progress == PAWebViewControllerLoading) {
-            NSLog(@"loading...");
-        } else if (progress == PAWebViewControllerLoaded) {
-            NSLog(@"loaded");
-            [webViewController hideActivityIndicator];
-        }
-    } completion:^(BOOL success) {
-        [self.navigationController popViewControllerAnimated:YES];
-        NSLog(@"completed %@", success?@"yes":@"no");
-    }];
-    
-    [vc showActivityIndicator];
-    [self.navigationController pushViewController:vc animated:YES];
+```objective-c
+PACreateChargeRequest *charge = [[PACreateChargeRequest alloc] init];
+charge.currency = @"EUR";
+charge.amount = 100;
+charge.orderDescription = @"Precio de alta";
+
+PAWebViewController *vc = [[PAPagantis sharedInstance] webViewControllerToCreateCharge:charge progress:^(PAWebViewController *webViewController, PAWebViewControllerProgress progress) {
+    if (progress == PAWebViewControllerLoading) {
+        NSLog(@"loading...");
+    } else if (progress == PAWebViewControllerLoaded) {
+        NSLog(@"loaded");
+        [webViewController hideActivityIndicator];
+    }
+} completion:^(BOOL success) {
+    [self.navigationController popViewControllerAnimated:YES];
+    NSLog(@"completed %@", success?@"yes":@"no");
+}];
+
+[vc showActivityIndicator];
+[self.navigationController pushViewController:vc animated:YES];
+```
 
 ### Finding charges:
 
@@ -217,35 +233,38 @@ To retrieve a list of charges you use the `findCharges:completion:` method. The 
 
 Example:
 
-    [[PAPagantis sharedInstance] findCharges:1 completion:^(NSError *error, NSArray *charges) {
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        NSLog(@"objects %d", charges.count);
-        for (PACharge *charge in charges) {
-            NSLog(@"charge %@ %@", charge.orderDescription, charge.identifier);
-        }
-    }];
-
+```objective-c
+[[PAPagantis sharedInstance] findCharges:1 completion:^(NSError *error, NSArray *charges) {
+    if (error) {
+        NSLog(@"error %@", error);
+        return;
+    }
+    
+    NSLog(@"objects %d", charges.count);
+    for (PACharge *charge in charges) {
+        NSLog(@"charge %@ %@", charge.orderDescription, charge.identifier);
+    }
+}];
+```
 
 ### Find a charge by its identifier:
 
 If you want to read the information about a charge and you know its identifier you can use this method. Just call `findChargeWithIdentifier:completion:` using the identifier you already know. In the completion block you will receive a `PACharge` object with the information of the charge or a `NSError` if something went wrong.
 
-    [[PAPagantis sharedInstance] findChargeWithIdentifier:@"cha_f54899832a0d1f1a4eb6be78aa63755c" completion:^(NSError *error, PACharge *charge) {
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        NSLog(@"amount %zd", charge.amount);
-        NSLog(@"refunded %@", charge.refunded?@"yes":@"no");
-        for (PARefund *refund in charge.refunds) {
-            NSLog(@"refund %zd", refund.amount);
-        }
-    }];
+```
+[[PAPagantis sharedInstance] findChargeWithIdentifier:@"cha_f54899832a0d1f1a4eb6be78aa63755c" completion:^(NSError *error, PACharge *charge) {
+    if (error) {
+        NSLog(@"error %@", error);
+        return;
+    }
+    
+    NSLog(@"amount %zd", charge.amount);
+    NSLog(@"refunded %@", charge.refunded?@"yes":@"no");
+    for (PARefund *refund in charge.refunds) {
+        NSLog(@"refund %zd", refund.amount);
+    }
+}];
+```
 
 ### Make a refund
 
@@ -253,18 +272,19 @@ You can refund a charge previously paid. You first create a `PACreateRefundReque
 
 Example:
 
-    PACreateRefundRequest *refund = [[PACreateRefundRequest alloc] init];
-    refund.chargeIdentifier = @"cha_f54899832b0d2f1a4eb6be78aa63755c";
-    refund.amount = 10;
-    [[PAPagantis sharedInstance] refundCharge:refund completion:^(NSError *error, PACharge *charge) {
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        NSLog(@"objects %@", charge.refunds);
-    }];
-
+```objective-c
+PACreateRefundRequest *refund = [[PACreateRefundRequest alloc] init];
+refund.chargeIdentifier = @"cha_f54899832b0d2f1a4eb6be78aa63755c";
+refund.amount = 10;
+[[PAPagantis sharedInstance] refundCharge:refund completion:^(NSError *error, PACharge *charge) {
+    if (error) {
+        NSLog(@"error %@", error);
+        return;
+    }
+    
+    NSLog(@"objects %@", charge.refunds);
+}];
+```
 
 ### Tokenize a card
 
@@ -274,25 +294,27 @@ This operation requires to present a `PAWebViewController`. But first of all you
 
 Example:
 
-    PATokenizeCardRequest *tokenize = [[PATokenizeCardRequest alloc] init];
-    tokenize.currency = @"EUR";
-    tokenize.amount = 100;
-    tokenize.orderDescription = @"Some useful description";
-    
-    PAWebViewController *vc = [[PAPagantis sharedInstance] webViewControllerToTokenizeCard:tokenize progress:^(PAWebViewController *webViewController, PAWebViewControllerProgress progress) {
-        if (progress == PAWebViewControllerLoading) {
-            NSLog(@"loading...");
-        } else if (progress == PAWebViewControllerLoaded) {
-            NSLog(@"loaded");
-            [webViewController hideActivityIndicator];
-        }
-    } completion:^(BOOL success) {
-        [self.navigationController popViewControllerAnimated:YES];
-        NSLog(@"completed %@", success?@"yes":@"no");
-    }];
-    
-    [vc showActivityIndicator];
-    [self.navigationController pushViewController:vc animated:YES];
+```objective-c
+PATokenizeCardRequest *tokenize = [[PATokenizeCardRequest alloc] init];
+tokenize.currency = @"EUR";
+tokenize.amount = 100;
+tokenize.orderDescription = @"Some useful description";
+
+PAWebViewController *vc = [[PAPagantis sharedInstance] webViewControllerToTokenizeCard:tokenize progress:^(PAWebViewController *webViewController, PAWebViewControllerProgress progress) {
+    if (progress == PAWebViewControllerLoading) {
+        NSLog(@"loading...");
+    } else if (progress == PAWebViewControllerLoaded) {
+        NSLog(@"loaded");
+        [webViewController hideActivityIndicator];
+    }
+} completion:^(BOOL success) {
+    [self.navigationController popViewControllerAnimated:YES];
+    NSLog(@"completed %@", success?@"yes":@"no");
+}];
+
+[vc showActivityIndicator];
+[self.navigationController pushViewController:vc animated:YES];
+```
 
 Subscriptions
 -------------
@@ -303,63 +325,66 @@ To subscribe a user to a subscription you first create a `PACreateSubscriptionRe
 
 Example.
 
-    PACreateSubscriptionRequest *subscription = [[PACreateSubscriptionRequest alloc] init];
-    subscription.currency = @"EUR";
-    subscription.amount = 100;
-    subscription.orderDescription = @"Some useful description";
-    subscription.planIdentifier = @"pla_a422185ba306983fc8c259ac35c40919";
-    
-    PAWebViewController *vc = [[PAPagantis sharedInstance] webViewControllerToCreateSubscription:subscription progress:^(PAWebViewController *webViewController, PAWebViewControllerProgress progress) {
-        if (progress == PAWebViewControllerLoading) {
-            NSLog(@"loading...");
-        } else if (progress == PAWebViewControllerLoaded) {
-            NSLog(@"loaded");
-            [webViewController hideActivityIndicator];
-        }
-    } completion:^(BOOL success) {
-        [self.navigationController popViewControllerAnimated:YES];
-        NSLog(@"completed %@", success?@"yes":@"no");
-    }];
-    
-    [vc showActivityIndicator];
-    [self.navigationController pushViewController:vc animated:YES];
+```objective-c
+PACreateSubscriptionRequest *subscription = [[PACreateSubscriptionRequest alloc] init];
+subscription.currency = @"EUR";
+subscription.amount = 100;
+subscription.orderDescription = @"Some useful description";
+subscription.planIdentifier = @"pla_a422185ba306983fc8c259ac35c40919";
+
+PAWebViewController *vc = [[PAPagantis sharedInstance] webViewControllerToCreateSubscription:subscription progress:^(PAWebViewController *webViewController, PAWebViewControllerProgress progress) {
+    if (progress == PAWebViewControllerLoading) {
+        NSLog(@"loading...");
+    } else if (progress == PAWebViewControllerLoaded) {
+        NSLog(@"loaded");
+        [webViewController hideActivityIndicator];
+    }
+} completion:^(BOOL success) {
+    [self.navigationController popViewControllerAnimated:YES];
+    NSLog(@"completed %@", success?@"yes":@"no");
+}];
+
+[vc showActivityIndicator];
+[self.navigationController pushViewController:vc animated:YES];
+```
 
 ### Finding subscriptions:
 
-    [[PAPagantis sharedInstance] findSubscriptions:1 completion:^(NSError *error, NSArray *objects) {
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        NSLog(@"subscriptions %zd", objects.count);
-        for (PASubscription *subscription in objects) {
-            NSLog(@"identifier %@", subscription.identifier);
-            NSLog(@"status %@", subscription.status);
-            NSLog(@"customer %@ %@", subscription.customer.name, subscription.customer.email);
-            NSLog(@"plan %@", subscription.plan.name);
-            NSLog(@"");
-        }
-    }];
-
+```objective-c
+[[PAPagantis sharedInstance] findSubscriptions:1 completion:^(NSError *error, NSArray *objects) {
+    if (error) {
+        NSLog(@"error %@", error);
+        return;
+    }
+    
+    NSLog(@"subscriptions %zd", objects.count);
+    for (PASubscription *subscription in objects) {
+        NSLog(@"identifier %@", subscription.identifier);
+        NSLog(@"status %@", subscription.status);
+        NSLog(@"customer %@ %@", subscription.customer.name, subscription.customer.email);
+        NSLog(@"plan %@", subscription.plan.name);
+        NSLog(@"");
+    }
+}];
+```
 
 ### Find a subscription by its identifier:
 
 If you want to fetch the information of subscription of which you know its identifier you can call the method `findSubscriptionWithIdentifier:completion:` and you will receive a `PASubscription` object with that information. Example:
 
-    [[PAPagantis sharedInstance] findSubscriptionWithIdentifier:@"sub_218802e1355c286aa2bb5f019d3f1388" completion:^(NSError *error, PASubscription *subscription) {
-        
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        NSLog(@"identifier %@", subscription.identifier);
-        NSLog(@"status %@", subscription.status);
-        NSLog(@"customer %@", subscription.customer.identifier);
-        NSLog(@"plan %@", subscription.plan.name);
-    }];
-
-
+```objective-c
+[[PAPagantis sharedInstance] findSubscriptionWithIdentifier:@"sub_218802e1355c286aa2bb5f019d3f1388" completion:^(NSError *error, PASubscription *subscription) {
+    
+    if (error) {
+        NSLog(@"error %@", error);
+        return;
+    }
+    NSLog(@"identifier %@", subscription.identifier);
+    NSLog(@"status %@", subscription.status);
+    NSLog(@"customer %@", subscription.customer.identifier);
+    NSLog(@"plan %@", subscription.plan.name);
+}];
+```
 
 Payment requests
 ----------------
@@ -368,83 +393,87 @@ Payment requests
 
 To create a payment request you first create a `PACreatePaymentRequest` object, fill it with the desired values and then you call `createPaymentRequest:completion:`. In the completion block you will receive a `PAPaymentRequest` object (unless something went wrong).
 
-    PACreatePaymentRequest *paymentRequest = [[PACreatePaymentRequest alloc] init];
-    paymentRequest.orderIdentifier = @"CPM1234";
-    paymentRequest.amount = 1000;
-    paymentRequest.currency = @"EUR";
-    paymentRequest.okURL = @"http://example.com/ok";
-    paymentRequest.nokURL = @"http://example.com/nok";
-    [[PAPagantis sharedInstance] createPaymentRequest:paymentRequest completion:^(NSError *error, PAPaymentRequest *paymentRequest) {
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        NSLog(@"identifier %@", paymentRequest.identifier);
-        NSLog(@"activities %zd", paymentRequest.activities.count);
-        for (PAActivity *activity in paymentRequest.activities) {
-            NSLog(@"activity %@", activity.activityType);
-        }
-    }];
-
+```objective-c
+PACreatePaymentRequest *paymentRequest = [[PACreatePaymentRequest alloc] init];
+paymentRequest.orderIdentifier = @"CPM1234";
+paymentRequest.amount = 1000;
+paymentRequest.currency = @"EUR";
+paymentRequest.okURL = @"http://example.com/ok";
+paymentRequest.nokURL = @"http://example.com/nok";
+[[PAPagantis sharedInstance] createPaymentRequest:paymentRequest completion:^(NSError *error, PAPaymentRequest *paymentRequest) {
+    if (error) {
+        NSLog(@"error %@", error);
+        return;
+    }
+    
+    NSLog(@"identifier %@", paymentRequest.identifier);
+    NSLog(@"activities %zd", paymentRequest.activities.count);
+    for (PAActivity *activity in paymentRequest.activities) {
+        NSLog(@"activity %@", activity.activityType);
+    }
+}];
+```
 
 ### Finding payment requests:
 
 You can ask the server for a list of payment requests. Just call `findPaymentRequests:completion` and you will receive an array of `PAPaymentRequest` objects. This method has one argument to indicate the page number so you can paginate the results.
 
-    [[PAPagantis sharedInstance] findPaymentRequests:1 completion:^(NSError *error, NSArray *objects) {
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
+```objective-c
+[[PAPagantis sharedInstance] findPaymentRequests:1 completion:^(NSError *error, NSArray *objects) {
+    if (error) {
+        NSLog(@"error %@", error);
+        return;
+    }
+    
+    NSLog(@"payment requests %zd", objects.count);
+    for (PAPaymentRequest *paymentRequest in objects) {
+        NSLog(@"identifier %@", paymentRequest.identifier);
+        NSLog(@"activities %zd", paymentRequest.activities.count);
+        for (PAActivity *activity in paymentRequest.activities) {
+            NSLog(@"activity %@", activity.activityType);
         }
-        
-        NSLog(@"payment requests %zd", objects.count);
-        for (PAPaymentRequest *paymentRequest in objects) {
-            NSLog(@"identifier %@", paymentRequest.identifier);
-            NSLog(@"activities %zd", paymentRequest.activities.count);
-            for (PAActivity *activity in paymentRequest.activities) {
-                NSLog(@"activity %@", activity.activityType);
-            }
-            NSLog(@"");
-        }
-    }];
-
+        NSLog(@"");
+    }
+}];
+```
 
 ### Find a payment request by its identifier:
 
 If you need the details of a payment request and you know its identifier you can call the `findPaymentRequestWithIdentifier:completion:` method. If everything does well you will receive a `PAPaymentRequest` object with the information of the desired payment request as second argument. The first argument, as always, will be a `NSError` that will be `nil` if everything went ok.
 
-    [[PAPagantis sharedInstance] findPaymentRequestWithIdentifier:@"pay_2b99a09ee5bc2b22a75b8e87ce4813ee" completion:^(NSError *error, PAPaymentRequest *paymentRequest) {
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        NSLog(@"identifier %@", paymentRequest.identifier);
-        NSLog(@"activities %zd", paymentRequest.activities.count);
-        for (PAActivity *activity in paymentRequest.activities) {
-            NSLog(@"activity %@", activity.activityType);
-        }
-    }];
-
+```objective-c
+[[PAPagantis sharedInstance] findPaymentRequestWithIdentifier:@"pay_2b99a09ee5bc2b22a75b8e87ce4813ee" completion:^(NSError *error, PAPaymentRequest *paymentRequest) {
+    if (error) {
+        NSLog(@"error %@", error);
+        return;
+    }
+    
+    NSLog(@"identifier %@", paymentRequest.identifier);
+    NSLog(@"activities %zd", paymentRequest.activities.count);
+    for (PAActivity *activity in paymentRequest.activities) {
+        NSLog(@"activity %@", activity.activityType);
+    }
+}];
+```
 
 ### Cancel a payment request:
 
 You can cancel a payment request by calling the `cancelPaymentRequestWithIdentifier:completion:` method. If the payment request is cancelled successfully you will receive a `PAPaymentRequest` object.
 
-    [[PAPagantis sharedInstance] cancelPaymentRequestWithIdentifier:@"pay_2b99a09ee5bc2b22a75b8e87ce4813ee" completion:^(NSError *error, PAPaymentRequest *paymentRequest) {
-        if (error) {
-            NSLog(@"error %@", error);
-            return;
-        }
-        
-        NSLog(@"identifier %@", paymentRequest.identifier);
-        NSLog(@"activities %zd", paymentRequest.activities.count);
-        for (PAActivity *activity in paymentRequest.activities) {
-            NSLog(@"activity %@", activity.activityType);
-        }
-    }];
-
+```objective-c
+[[PAPagantis sharedInstance] cancelPaymentRequestWithIdentifier:@"pay_2b99a09ee5bc2b22a75b8e87ce4813ee" completion:^(NSError *error, PAPaymentRequest *paymentRequest) {
+    if (error) {
+        NSLog(@"error %@", error);
+        return;
+    }
+    
+    NSLog(@"identifier %@", paymentRequest.identifier);
+    NSLog(@"activities %zd", paymentRequest.activities.count);
+    for (PAActivity *activity in paymentRequest.activities) {
+        NSLog(@"activity %@", activity.activityType);
+    }
+}];
+```
 
 Presenting and personalizing PAWebViewControllers
 =================================
@@ -468,42 +497,44 @@ If you want to present the screen modally the best way is to create a new `UINav
 
 Since `UIBarButtonItem` do not accept blocks we need to refer to a method in our own class and we need to dismiss the presented view controller in that method:
 
-    - (void)dismissPresentedViewController:(id)sender {
-	    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
-	}
+```objective-c
+- (void)dismissPresentedViewController:(id)sender {
+    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+}
+```
 
 We will trigger this method when the `UIBarButtonItem` is tapped and also when the completion block is called. This is the rest of the code:
 
-    PATokenizeCardRequest *tokenize = [[PATokenizeCardRequest alloc] init];
-    tokenize.currency = @"EUR";
-    tokenize.amount = 100;
-    tokenize.orderDescription = @"Some useful description";
-    
-    UINavigationController *nc = [[UINavigationController alloc] init];
-    
-    PAWebViewController *vc = [[PAPagantis sharedInstance] webViewControllerToTokenizeCard:tokenize progress:^(PAWebViewController *webViewController, PAWebViewControllerProgress progress) {
-        if (progress == PAWebViewControllerLoading) {
-            NSLog(@"loading...");
-        } else if (progress == PAWebViewControllerLoaded) {
-            NSLog(@"loaded");
-            [webViewController hideActivityIndicator];
-        }
-    } completion:^(BOOL success) {
-        [self dismissPresentedViewController:nil];
-        NSLog(@"completed... %@", success?@"yes":@"no");
-    }];
-    
-    [vc showActivityIndicator];
-    vc.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissPresentedViewController:)];
-    
-    nc.viewControllers = @[vc];
-    // Change the transition style if you wish
-    nc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    // Change the presentation style in an iPad
-    nc.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:nc animated:YES completion:nil];
+```objective-c
+PATokenizeCardRequest *tokenize = [[PATokenizeCardRequest alloc] init];
+tokenize.currency = @"EUR";
+tokenize.amount = 100;
+tokenize.orderDescription = @"Some useful description";
 
+UINavigationController *nc = [[UINavigationController alloc] init];
 
+PAWebViewController *vc = [[PAPagantis sharedInstance] webViewControllerToTokenizeCard:tokenize progress:^(PAWebViewController *webViewController, PAWebViewControllerProgress progress) {
+    if (progress == PAWebViewControllerLoading) {
+        NSLog(@"loading...");
+    } else if (progress == PAWebViewControllerLoaded) {
+        NSLog(@"loaded");
+        [webViewController hideActivityIndicator];
+    }
+} completion:^(BOOL success) {
+    [self dismissPresentedViewController:nil];
+    NSLog(@"completed... %@", success?@"yes":@"no");
+}];
+
+[vc showActivityIndicator];
+vc.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissPresentedViewController:)];
+
+nc.viewControllers = @[vc];
+// Change the transition style if you wish
+nc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+// Change the presentation style in an iPad
+nc.modalPresentationStyle = UIModalPresentationFormSheet;
+[self presentViewController:nc animated:YES completion:nil];
+```
 
 ### Indicating progress
 
@@ -511,11 +542,13 @@ The methods that create a `PAWebViewController` accept a progress block as well 
 
 You can use any library such as `SVProgressHUD` or whatever you prefer. Nevertheless the `PAWebViewController` class has some utility methods that could be just what you want. These methods are:
 
-	- (void)showActivityIndicator;
-	
-	- (void)showActivityIndicatorWithStyle:(UIActivityIndicatorViewStyle)style;
-	
-	- (void)hideActivityIndicator;
+```objective-c
+- (void)showActivityIndicator;
+
+- (void)showActivityIndicatorWithStyle:(UIActivityIndicatorViewStyle)style;
+
+- (void)hideActivityIndicator;
+```
 
 You can call `showActivityIndicator` or `showActivityIndicatorWithStyle:` as soon as you create the `PAWebViewController` and before presenting it. And then you should call `hideActivityIndicator` when the progress block is called when a value of `PAWebViewControllerLoaded`.
 
